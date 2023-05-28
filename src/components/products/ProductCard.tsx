@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const ProductCard = ({ item }: { item: ProductValues }) => {
+const ProductCard = ({ item }: { item?: ProductValues }) => {
   const navigate = useNavigate();
   const handleCardClick = () => {
     navigate(`/products/${item?.id}`);
