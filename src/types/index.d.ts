@@ -17,3 +17,10 @@ type selectedItem = {
   quantity: number;
   image: string;
 };
+
+type BaseProductValues = Omit<ProductValues, "image">;
+
+type FormValuesType = BaseProductValues & {
+  image: File | null;
+  createdAt: Date;
+};
