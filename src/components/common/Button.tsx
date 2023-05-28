@@ -2,8 +2,8 @@ import { ButtonHTMLAttributes, CSSProperties, ReactNode } from "react";
 import styled, { css } from "styled-components";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  onClick: () => void;
-  children: ReactNode;
+  onClick?: () => void;
+  children?: ReactNode;
   disabled?: boolean;
   Icon?: ReactNode;
   variant?:
