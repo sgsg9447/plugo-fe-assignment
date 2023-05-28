@@ -41,7 +41,7 @@ const CartCard = ({
     <>
       {selectedItem.map((item: CartItem, index: number) => {
         return (
-          <CartCardWrapper>
+          <CartCardWrapper key={index}>
             <CartCardContentBox onClick={() => handleSelect(index)}>
               {isSelected[index] ? (
                 <CheckBoxIcon size={28} />
