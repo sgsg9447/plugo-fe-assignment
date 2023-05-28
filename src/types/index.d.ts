@@ -8,6 +8,7 @@ type ProductValues = {
   material: string;
   size: string;
   image: string;
+  createdAt: string | Date;
 };
 
 type selectedItem = {
@@ -26,3 +27,16 @@ type FormValuesType = BaseProductValues & {
 };
 
 type CartItem = Omit<SelectedItem, "stock">;
+
+type DataType = {
+  price: number;
+  createdAt: string | Date;
+};
+
+type SortByType =
+  | "highestPrice"
+  | "lowestPrice"
+  | "newest"
+  | "oldest"
+  | "category"
+  | "color";

@@ -3,12 +3,12 @@ import { BASE_URL } from "@/constants/url";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export const useGetItems = () => {
-  return useQuery(["items"], async () => {
+  const { data, isLoading, error } = useQuery(["items"], async () => {
     const response = await axios.get(`${BASE_URL}/products`);
     return response.data;
   });
+  return { data: data ?? [], isLoading, error };
 };
-
 export const useGetItem = (id: string) => {
   return useQuery(["item", id], async () => {
     const response = await axios.get(`${BASE_URL}/products/${id}`);

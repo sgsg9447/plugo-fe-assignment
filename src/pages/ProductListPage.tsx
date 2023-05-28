@@ -5,10 +5,12 @@ import SideBarMobile from "@/components/layout/SideBarMobile";
 import { useGetItems } from "@/services";
 import { useRecoilValue } from "recoil";
 import { isMobileState } from "@/store/atom";
+import { useSortedData } from "@/hooks/useSortedData";
 
 const ProductListPage = () => {
   const isMobile = useRecoilValue(isMobileState);
   const { data: items, isLoading, error } = useGetItems();
+  const sortedItems: ProductValues[] = useSortedData(items, "oldest"); // Ensure sortedItems is of type ProductValues[]
 
   return (
     <>
@@ -21,7 +23,7 @@ const ProductListPage = () => {
             ""
           ) : (
             <ProductCardBox>
-              {items.map((item: ProductValues) => (
+              {sortedItems.map((item: ProductValues) => (
                 <ProductCard key={item.id} item={item} />
               ))}
             </ProductCardBox>
@@ -36,7 +38,7 @@ const ProductListPage = () => {
             ""
           ) : (
             <ProductCardBox>
-              {items.map((item: ProductValues) => (
+              {sortedItems.map((item: ProductValues) => (
                 <ProductCard key={item.id} item={item} />
               ))}
             </ProductCardBox>
