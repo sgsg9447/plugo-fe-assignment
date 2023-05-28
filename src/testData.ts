@@ -8,7 +8,7 @@ export const items = [
     color: "Red",
     material: "Cotton",
     size: "M",
-    image: "http://example.com/product1.jpg",
+    image: "",
   },
   {
     id: "2",
@@ -19,7 +19,7 @@ export const items = [
     color: "Blue",
     material: "Leather",
     size: "L",
-    image: "http://example.com/product2.jpg",
+    image: "",
   },
   {
     id: "3",
@@ -30,7 +30,7 @@ export const items = [
     color: "Black",
     material: "Rubber",
     size: "S",
-    image: "http://example.com/product3.jpg",
+    image: "",
   },
 ];
 export const item = {
@@ -42,5 +42,5 @@ export const item = {
   color: "Red",
   material: "Cotton",
   size: "M",
-  image: "http://example.com/product1.jpg",
+  image: "",
 };
