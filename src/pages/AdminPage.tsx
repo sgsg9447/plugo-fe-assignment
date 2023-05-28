@@ -6,20 +6,23 @@ import { v4 as uuidv4 } from "uuid";
 import { useCreateItem } from "../services";
 //TODO: Img upload 구현
 
+const DEFAULT_FORM_VALUES = {
+  productName: "",
+  price: 0,
+  stock: 0,
+  category: "",
+  color: "",
+  material: "",
+  size: "",
+  image: null,
+  createdAt: new Date(),
+  id: "",
+};
+
 const AdminPage = () => {
   const [image, setImage] = useState<File | null>(null);
-  const [formValues, setFormValues] = useState<FormValuesType>({
-    productName: "",
-    price: 0,
-    stock: 0,
-    category: "",
-    color: "",
-    material: "",
-    size: "",
-    image: null,
-    createdAt: new Date(),
-    id: "",
-  });
+  const [formValues, setFormValues] =
+    useState<FormValuesType>(DEFAULT_FORM_VALUES);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -56,28 +59,21 @@ const AdminPage = () => {
       ...formValues,
       id: itemId,
       createdAt: createdAt,
-      image: "image",
+      image:
+        "https://seulgi-product-images.s3.ap-northeast-2.amazonaws.com/logo.webp",
     };
     try {
       await createItemMutation.mutateAsync(itemWithId);
-      setFormValues({
-        productName: "",
-        price: 0,
-        stock: 0,
-        category: "",
-        color: "",
-        material: "",
-        size: "",
-        image: null,
-        createdAt: new Date(),
-        id: "",
-      });
-      setImage(null);
+      resetForm();
       alert("Product created successfully");
     } catch (error) {
       console.error("Failed to create product:", error);
       alert("Failed to create product. Please try again.");
     }
+  };
+  const resetForm = () => {
+    setFormValues(DEFAULT_FORM_VALUES);
+    setImage(null);
   };
 
   return (

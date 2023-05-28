@@ -11,66 +11,35 @@ import {
   ProductDetailPrice,
   ProductDetailTitle,
 } from "@/pages/ProductDetailPage";
-import { useEffect, useState } from "react";
 
 type CartCardProps = {
   selectedItem: CartItem[];
   isSelected: boolean[];
   onSelectedItemsChange: (index: number) => void;
+  increaseQuantity: (index: number) => void;
+  decreaseQuantity: (index: number) => void;
+  removeItem: (index: number) => void;
 };
 
 const CartCard = ({
   selectedItem,
   isSelected,
   onSelectedItemsChange,
+  increaseQuantity,
+  decreaseQuantity,
+  removeItem,
 }: CartCardProps) => {
   if (!selectedItem) {
     return null;
   }
-  const [eachSelectedItem, setEachSelectedItem] = useState<CartItem[]>([
-    ...selectedItem,
-  ]);
-
-  const increaseQuantity = (index: number) => {
-    setEachSelectedItem((prevItems) => {
-      const newItems = [...prevItems];
-      newItems[index].quantity += 1;
-      localStorage.setItem("selectedItems", JSON.stringify(newItems));
-      return newItems;
-    });
-  };
-
-  const decreaseQuantity = (index: number) => {
-    setEachSelectedItem((prevItems) => {
-      const newItems = [...prevItems];
-      newItems[index].quantity =
-        newItems[index].quantity > 0 ? newItems[index].quantity - 1 : 0;
-      localStorage.setItem("selectedItems", JSON.stringify(newItems));
-      return newItems;
-    });
-  };
-  useEffect(() => {
-    if (selectedItem) {
-      setEachSelectedItem([...selectedItem]);
-    }
-  }, [selectedItem]);
 
   const handleSelect = (index: number) => {
     onSelectedItemsChange(index);
   };
 
-  const removeItem = (index: number) => {
-    setEachSelectedItem((prevItems) => {
-      const newItems = [...prevItems];
-      newItems.splice(index, 1);
-      localStorage.setItem("selectedItems", JSON.stringify(newItems));
-      return newItems;
-    });
-  };
-
   return (
     <>
-      {eachSelectedItem.map((item: CartItem, index: number) => {
+      {selectedItem.map((item: CartItem, index: number) => {
         return (
           <CartCardWrapper key={index}>
             <CartCardContentBox onClick={() => handleSelect(index)}>
