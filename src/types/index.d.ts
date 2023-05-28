@@ -9,3 +9,11 @@ type ProductValues = {
   size: string;
   image: string;
 };
+
+type selectedItem = {
+  productName: string;
+  price: number;
+  stock: number;
+  quantity: number;
+  image: string;
+};

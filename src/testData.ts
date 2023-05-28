@@ -33,3 +33,14 @@ export const items = [
     image: "http://example.com/product3.jpg",
   },
 ];
+export const item = {
+  id: "1",
+  productName: "Test Product 1",
+  price: 100,
+  stock: 50,
+  category: "Clothing",
+  color: "Red",
+  material: "Cotton",
+  size: "M",
+  image: "http://example.com/product1.jpg",
+};
