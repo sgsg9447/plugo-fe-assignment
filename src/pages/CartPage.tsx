@@ -1,24 +1,16 @@
 import styled from "styled-components";
 import { CheckBoxIcon, EmptyBoxIcon } from "@/components/common/icons";
-import CartCard from "@/components/cart/CartCard";
-import TotalPriceCard from "@/components/cart/TotalPriceCard";
 import { useRecoilValue } from "recoil";
 import { isMobileState } from "@/store/atom";
 import { useEffect, useState } from "react";
-
-type CartItem = {
-  productName: string;
-  quantity: number;
-  price: number;
-  image: string;
-};
+import CartCard from "@/components/cart/CartCard";
+import TotalPriceCard from "@/components/cart/TotalPriceCard";
 
 const CartPage = () => {
   const isMobile = useRecoilValue(isMobileState);
-
   const [combinedItems, setCombinedItems] = useState<CartItem[]>([]);
-  const [isAllSelected, setIsAllSelected] = useState(false);
 
+  const [isAllSelected, setIsAllSelected] = useState(false);
   const [isSelected, setIsSelected] = useState<boolean[]>(
     new Array(combinedItems.length).fill(false)
   );
@@ -55,6 +47,34 @@ const CartPage = () => {
     setIsAllSelected(isSelected.every(Boolean));
   }, [isSelected]);
 
+  const increaseQuantity = (index: number) => {
+    setCombinedItems((prevItems) => {
+      const newItems = [...prevItems];
+      newItems[index].quantity += 1;
+      localStorage.setItem("selectedItems", JSON.stringify(newItems));
+      return newItems;
+    });
+  };
+
+  const decreaseQuantity = (index: number) => {
+    setCombinedItems((prevItems) => {
+      const newItems = [...prevItems];
+      newItems[index].quantity =
+        newItems[index].quantity > 0 ? newItems[index].quantity - 1 : 0;
+      localStorage.setItem("selectedItems", JSON.stringify(newItems));
+      return newItems;
+    });
+  };
+
+  const removeItem = (index: number) => {
+    setCombinedItems((prevItems: any) => {
+      const newItems = [...prevItems];
+      newItems.splice(index, 1);
+      localStorage.setItem("selectedItems", JSON.stringify(newItems));
+      return newItems;
+    });
+  };
+
   return (
     <>
       {isMobile ? (
@@ -75,6 +95,9 @@ const CartPage = () => {
               selectedItem={combinedItems}
               isSelected={isSelected}
               onSelectedItemsChange={handleSelectedItemsChange}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              removeItem={removeItem}
             />
             <TotalPriceCard selectedItem={combinedItems} />
           </MobileCartPageWrapper>
@@ -94,6 +117,9 @@ const CartPage = () => {
               selectedItem={combinedItems}
               isSelected={isSelected}
               onSelectedItemsChange={handleSelectedItemsChange}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              removeItem={removeItem}
             />
             <TotalPriceCard selectedItem={combinedItems} />
           </CartPageWrapper>
@@ -109,7 +135,7 @@ const CartPageWrapper = styled.div`
   padding: 20px 200px;
   color: var(--color-text);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
   margin-bottom: 20px;
   justify-content: center;

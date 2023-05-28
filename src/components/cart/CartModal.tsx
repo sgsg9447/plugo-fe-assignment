@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Input } from "@/components/common/Input";
 import { Button } from "@/components/common/Button";
 import { LeftArrowIcon } from "@/components/common/icons";
+import { useNavigate } from "react-router-dom";
 
 interface ModalProps {
   isOpen: boolean;
@@ -13,8 +14,8 @@ interface ModalProps {
 const CartModal = ({ isOpen, onClose, item }: ModalProps) => {
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState(0);
+  const navigate = useNavigate();
 
-  console.log(item);
   if (!isOpen) {
     return null;
   }
@@ -43,6 +44,7 @@ const CartModal = ({ isOpen, onClose, item }: ModalProps) => {
     localStorage.setItem("selectedItems", JSON.stringify(updatedItems));
     setInputValue(value!);
     onClose();
+    navigate("/cart");
   };
   const handleButtonInputClick = (value?: number) => {
     setIsInputVisible(true);
@@ -77,8 +79,8 @@ const CartModal = ({ isOpen, onClose, item }: ModalProps) => {
     } else {
       updatedItems = [selectedItem];
     }
-
     localStorage.setItem("selectedItems", JSON.stringify(updatedItems));
+    navigate("/cart");
   };
 
   return (
