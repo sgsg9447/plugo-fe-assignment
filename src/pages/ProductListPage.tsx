@@ -26,7 +26,11 @@ const ProductListPage = () => {
     <>
       {isMobile ? (
         <MobileProductListPageWrapper>
-          <SideBarMobile />
+          <SideBarMobile
+            setSelectedCategory={setSelectedCategory}
+            setSelectedColor={setSelectedColor}
+            setSelectedSort={setSelectedSort}
+          />
           {isLoading ? (
             <p>Loading...</p>
           ) : error ? (
