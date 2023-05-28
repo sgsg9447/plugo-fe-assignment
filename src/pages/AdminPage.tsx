@@ -59,7 +59,8 @@ const AdminPage = () => {
       ...formValues,
       id: itemId,
       createdAt: createdAt,
-      image: "image",
+      image:
+        "https://seulgi-product-images.s3.ap-northeast-2.amazonaws.com/logo.webp",
     };
     try {
       await createItemMutation.mutateAsync(itemWithId);
