@@ -24,3 +24,5 @@ type FormValuesType = BaseProductValues & {
   image: File | null;
   createdAt: Date;
 };
+
+type CartItem = Omit<SelectedItem, "stock">;
