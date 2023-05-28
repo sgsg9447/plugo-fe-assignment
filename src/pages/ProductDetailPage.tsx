@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Button } from "../components/common/Button";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { isMobileState } from "../store/atom";
 import { CartIcon, ChatIcon } from "@/components/common/icons";
@@ -11,7 +11,7 @@ import CartModal from "@/components/cart/CartModal";
 const ProductDetailPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobile = useRecoilValue(isMobileState);
-  const { id } = useParams();
+  // const { id } = useParams();
   //TODO : data연결
   // const { data: item } = useGetItem(id!) as { data: ProductValues };
   const handleCartClick = () => {
