@@ -1,7 +1,22 @@
 import styled from "styled-components";
 import { SearchIcon } from "@/components/common/icons";
 
-const SideBar = () => {
+const SideBar: React.FC<SideBarProps> = ({
+  setSelectedCategory,
+  setSelectedColor,
+  setSelectedSort,
+}) => {
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const handleColorClick = (color: string) => {
+    setSelectedColor(color);
+  };
+
+  const handleSortClick = (sort: SortByType) => {
+    setSelectedSort(sort);
+  };
   return (
     <SideBarWrapper>
       <SideBarContentBox>
@@ -11,25 +26,54 @@ const SideBar = () => {
         </SearchBarBox>
         <CategoryBox>
           <SideBarTitle>Category</SideBarTitle>
-          <SideBarSubTitle>Hijap</SideBarSubTitle>
-          <SideBarSubTitle>Dress</SideBarSubTitle>
-          <SideBarSubTitle>Bottom</SideBarSubTitle>
+          <SideBarSubTitle onClick={() => handleCategoryClick("hijap")}>
+            Hijap
+          </SideBarSubTitle>
+          <SideBarSubTitle onClick={() => handleCategoryClick("dress")}>
+            Dress
+          </SideBarSubTitle>
+          <SideBarSubTitle onClick={() => handleCategoryClick("bottom")}>
+            Bottom
+          </SideBarSubTitle>
         </CategoryBox>
 
         <SortingBox>
           <SideBarTitle>Sort</SideBarTitle>
-          <SideBarSubTitle>Highes Price</SideBarSubTitle>
-          <SideBarSubTitle>Lowest Price</SideBarSubTitle>
-          <SideBarSubTitle>Newest</SideBarSubTitle>
-          <SideBarSubTitle>Oldest</SideBarSubTitle>
+          <SideBarSubTitle onClick={() => handleSortClick("highestPrice")}>
+            Highest Price
+          </SideBarSubTitle>
+          <SideBarSubTitle onClick={() => handleSortClick("lowestPrice")}>
+            Lowest Price
+          </SideBarSubTitle>
+          <SideBarSubTitle onClick={() => handleSortClick("newest")}>
+            Newest
+          </SideBarSubTitle>
+          <SideBarSubTitle onClick={() => handleSortClick("oldest")}>
+            Oldest
+          </SideBarSubTitle>
         </SortingBox>
         <SideBarTitle>Color</SideBarTitle>
         <ColorBox>
-          <Color bgcolor="var(--color-white)" />
-          <Color bgcolor="var(--color-light-beige)" />
-          <Color bgcolor="var(--color-light-green)" />
-          <Color bgcolor="var(--color-light-pink)" />
-          <Color bgcolor="var(--color-black)" />
+          <Color
+            bgcolor="var(--color-white)"
+            onClick={() => handleColorClick("white")}
+          />
+          <Color
+            bgcolor="var(--color-light-beige)"
+            onClick={() => handleColorClick("beige")}
+          />
+          <Color
+            bgcolor="var(--color-light-green)"
+            onClick={() => handleColorClick("green")}
+          />
+          <Color
+            bgcolor="var(--color-light-pink)"
+            onClick={() => handleColorClick("pink")}
+          />
+          <Color
+            bgcolor="var(--color-black)"
+            onClick={() => handleColorClick("black")}
+          />
         </ColorBox>
       </SideBarContentBox>
     </SideBarWrapper>

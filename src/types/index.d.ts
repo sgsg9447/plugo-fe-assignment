@@ -40,3 +40,9 @@ type SortByType =
   | "oldest"
   | "category"
   | "color";
+
+type SideBarProps = {
+  setSelectedCategory: (category: string) => void;
+  setSelectedColor: (color: string) => void;
+  setSelectedSort: React.Dispatch<React.SetStateAction<SortByType>>;
+};
