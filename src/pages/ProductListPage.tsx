@@ -1,34 +1,46 @@
 import styled from "styled-components";
-import ProductCard from "../components/products/ProductCard";
+import ProductCard from "@/components/products/ProductCard";
 import SideBar from "@/components/layout/SideBar";
 import SideBarMobile from "@/components/layout/SideBarMobile";
+import { useGetItems } from "@/services";
 import { useRecoilValue } from "recoil";
 import { isMobileState } from "@/store/atom";
-import { items } from "@/testData";
 
 const ProductListPage = () => {
   const isMobile = useRecoilValue(isMobileState);
-  // const { data: items, isLoading, error } = useGetItems();
+  const { data: items, isLoading, error } = useGetItems();
 
   return (
     <>
       {isMobile ? (
         <MobileProductListPageWrapper>
           <SideBarMobile />
-          <ProductCardBox>
-            {items.map((item: ProductValues) => (
-              <ProductCard key={item.id} item={item} />
-            ))}
-          </ProductCardBox>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            ""
+          ) : (
+            <ProductCardBox>
+              {items.map((item: ProductValues) => (
+                <ProductCard key={item.id} item={item} />
+              ))}
+            </ProductCardBox>
+          )}
         </MobileProductListPageWrapper>
       ) : (
         <ProductListPageWrapper>
           <SideBar />
-          <ProductCardBox>
-            {items.map((item: ProductValues) => (
-              <ProductCard key={item.id} item={item} />
-            ))}
-          </ProductCardBox>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            ""
+          ) : (
+            <ProductCardBox>
+              {items.map((item: ProductValues) => (
+                <ProductCard key={item.id} item={item} />
+              ))}
+            </ProductCardBox>
+          )}
         </ProductListPageWrapper>
       )}
     </>

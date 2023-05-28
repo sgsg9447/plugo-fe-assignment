@@ -2,8 +2,8 @@ import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@/components/common/Button";
 import { Input } from "@/components/common/Input";
-// import { v4 as uuidv4 } from "uuid";
-// import { useCreateItem } from "../services";
+import { v4 as uuidv4 } from "uuid";
+import { useCreateItem } from "../services";
 //TODO: Img upload 구현
 
 const AdminPage = () => {
@@ -32,7 +32,6 @@ const AdminPage = () => {
       const selectedFile = event.target.files[0];
       setImage(selectedFile);
 
-      // Update the formValues state with the selected file.
       setFormValues((prevFormValues) => ({
         ...prevFormValues,
         image: selectedFile,
@@ -47,33 +46,33 @@ const AdminPage = () => {
     });
   };
 
-  // const createItemMutation = useCreateItem();
+  const createItemMutation = useCreateItem();
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // const itemId = uuidv4();
-    // const createdAt = new Date().toISOString(); // Get the current time in ISO string format
-    // const itemWithId = {
-    //   ...formValues,
-    //   id: itemId,
-    //   createdAt: createdAt,
-    //   image: "image",
-    // };
+    const itemId = uuidv4();
+    const createdAt = new Date().toISOString(); // Get the current time in ISO string format
+    const itemWithId = {
+      ...formValues,
+      id: itemId,
+      createdAt: createdAt,
+      image: "image",
+    };
     try {
-      // await createItemMutation.mutateAsync(itemWithId);
-      // setFormValues({
-      //   productName: "",
-      //   price: 0,
-      //   stock: 0,
-      //   category: "",
-      //   color: "",
-      //   material: "",
-      //   size: "",
-      //   image: null,
-      //   createdAt: new Date(),
-      //   id: "",
-      // });
-      // setImage(null) //다시 확인필요
+      await createItemMutation.mutateAsync(itemWithId);
+      setFormValues({
+        productName: "",
+        price: 0,
+        stock: 0,
+        category: "",
+        color: "",
+        material: "",
+        size: "",
+        image: null,
+        createdAt: new Date(),
+        id: "",
+      });
+      setImage(null);
       alert("Product created successfully");
     } catch (error) {
       console.error("Failed to create product:", error);
