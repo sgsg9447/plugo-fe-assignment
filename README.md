@@ -3,7 +3,8 @@
 ## Project Description
 
 ### Project Introduction
-- This is a clone of an e-commerce website with an admin feature. The website includes functionality to create, upload, and read a products.  
+- This project, titled "Plugo Korea Frontend Implementation Assignment," is a clone of an e-commerce website with an admin feature. 
+- It aims to replicate the functionality of an e-commerce platform, including the ability to create, upload, and view products.
 
 ### Directory Structure
 ```
@@ -72,21 +73,28 @@ yarn
 ```
 yarn dev
 ```
-
 ## Tech Stack
-### client
+### Client
 - `TypeScript`
-- `react`
-- `vite`
-- `react-query`
-- `react-router-dom`
-- `recoil`
-- `styled-components`
+- `React`
+- `Vite`
+- `React-query`
+- `React-router-dom`
+- `Recoil`
+- `Styled-components`
 
-### server
-- `aws serverless`
+### Server
+- `AWS Serverless`
+
+### Database
+- `DynamoDB`
+
+### Storage
 - `S3 for image handling`
-- `vercel`
+
+### Deployment / Platform
+- `Vercel`
+
 
 ## MVP
 - [x] Admin: Create Product
@@ -112,13 +120,21 @@ yarn dev
 
 
 ## Project Consideration
-- Reusable component 
+- Reusable And Extensible Component
     - Button, Input
+    - It accepts all attributes used by HTML button elements via the `...rest` operator, which are passed on to the styled component
 - Responsive UI
     - ResizeProvider Component Separation
+- Layout Component Separation
 - Image
     - S3 Buckets
 - Backend API
     - aws serverless
     - DynamoDB
+- Absolute Import
+    - This choice helps to keep our import statements clean and clear. 
+    - It avoids issues related to complex relative paths, especially when dealing with deeply nested files.
+- Deployment with Vercel
+    - As the code is pushed to GitHub, Vercel automatically builds and deploys the changes. 
+    - This constitutes a simple CI/CD pipeline focusing on continuous deployment.
     
